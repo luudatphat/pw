@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="subsribe()">Subscribe</button>
+
+    <script>
+        addEventListener('load', async () => {
+            let sw = await navigator.serviceWorker.register('./sw.js')
+            console.log(sw)
+        })
+
+        async function subsribe() {
+            let sw = await navigator.serviceWorker.ready;
+            let push = await sw.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: {
+                    publicKey: 'BO7xGYV8gEcHEBspI7BucwwsIZ0SJHhswDIqY--qq5R1ClZpaXctvyblyW1Kd-ws9si7HN-y-ZEmptsyv1oEHPs',
+                    privateKey: 'xSMy65tWtQWRik_kFKN3mY7Kjc2Vj-vLKaKD0-GvL58'
+                }
+            })
+            console.log(JSON.stringify(push))
+        }
+    </script>
+</body>
+
+</html>
